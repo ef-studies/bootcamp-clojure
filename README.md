@@ -1,6 +1,10 @@
 # bootcamp
 
-A Clojure library designed to ... well, that part is up to you.
+Project to implement knowledge acquired through Alura Yes She Codes Bootcamp.
+
+## Authors
+- Fernanda Andrade
+- Emily Faccin
 
 ## Usage
 
