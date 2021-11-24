@@ -8,6 +8,7 @@
              :cpf   "39875649088",
              :email "emily.faccin@nubank.com.br"})
 
+(println "Client:" client)
 ; ==================================================
 
 ; Dado que o exercicio trata de apenas um cliente, nao ha necessidade
@@ -20,5 +21,20 @@
 
 (def credit-card {:number          "0000 0000 0000 0000",
                   :cvv             "432",
-                  :expiration-date "2021-11-22",
+                  :expiration-date "2029-11-22",
                   :limit           1000.0})
+
+(println "Credit Card:" credit-card)
+; ====================================================
+
+;{:purchase {:date string,
+;             :value double,
+;             :seller string,
+;             :category string}}
+
+(def purchase {:date     "2021-11-22",
+               :value    100.0,
+               :seller   "Magalu",
+               :category "eletronics"})
+
+(println "Purchase:" purchase)
