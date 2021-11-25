@@ -29,17 +29,39 @@
 
 ; calcular o total do mes solicitado
 
-(defn total-by-month
-  "Returns the total of purchases from the month required"
-  [month purchases]
-
-  )
-
 (defn month-retriever
+  "Returns the month of given date
+  e.g. 2021-10-21 will return 10"
   [date]
   ((str/split date #"-") 1))
 
-(println (filter (fn [purchase] (= (month-retriever (:date purchase)) "05")) b.db/purchases))
+(defn purchased-in-this-month?
+  [month purchase]
+  (= month (month-retriever (:date purchase))))
+
+(defn filter-by-month
+  "Returns only purchases that were made on given month"
+  [month purchases]
+  (filter #(purchased-in-this-month? month %) purchases))
+
+(defn total-by-month
+  "Returns the total of purchases from the month required"
+  [month purchases]
+  (->> purchases
+       (filter-by-month month)
+       (map :value)
+       (reduce +)))
+
+(defn print-total-bill
+  [month purchases]
+  (println "========================")
+  (println "O total da sua fatura no mês" month "é R$" (total-by-month month purchases))
+  (println "========================"))
+
+(print-total-bill "05" b.db/purchases)
+
+;(println (reduce + (map :value (filter (fn [purchase] (= (month-retriever (:date purchase)) "05")) b.db/purchases))))
+;(println (reduce + (map :value (filter #(purchased-in-this-month? "05" %) b.db/purchases))))
 
 
 
