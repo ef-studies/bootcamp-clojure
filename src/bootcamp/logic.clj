@@ -63,7 +63,31 @@
 ;(println (reduce + (map :value (filter (fn [purchase] (= (month-retriever (:date purchase)) "05")) b.db/purchases))))
 ;(println (reduce + (map :value (filter #(purchased-in-this-month? "05" %) b.db/purchases))))
 
+;; ==========================================
 
+; busca por valor ou estabelecimento
+
+(defn filter-by-seller
+  [seller purchases]
+  (filter #(= seller (:seller %)) purchases))
+
+(println (filter-by-seller "Magalu" b.db/purchases))
+
+(defn filter-by-value
+  [value purchases]
+  (filter #(= (double (read-string value)) (:value %)) purchases))
+
+(println (filter-by-value "100" b.db/purchases))
+
+(defn filter-by-value-or-seller
+  "Returns all purchases that attends range informed or seller"
+  [seller-or-value purchases]
+  (if (symbol? (read-string seller-or-value))
+    (filter-by-seller seller-or-value purchases)
+    (filter-by-value seller-or-value purchases)))
+
+(println "Por valor:" (filter-by-value-or-seller "100" b.db/purchases))
+(println "Por estabelecimento:" (filter-by-value-or-seller "Magalu" b.db/purchases))
 
 
 
