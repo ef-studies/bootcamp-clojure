@@ -75,7 +75,7 @@
 
 (defn filter-by-value
   [value purchases]
-  (filter #(= (double (read-string value)) (:value %)) purchases))
+  (filter #(== (read-string value) (:value %)) purchases))
 
 (println (filter-by-value "100" b.db/purchases))
 
