@@ -2,6 +2,17 @@
   (:require [bootcamp.db :as b.db]
             [clojure.string :as str]))
 
+; funcao que adiciona uma compra ao array de compras
+(defn adiciona-compra
+  "Adiciona uma compra ao final do array de compras passado"
+  [purchases new-purchase]
+  {; assegura que o array de retorno contem exatamente um item a mais que o de entrada
+   :post [(= (count %) (inc (count purchases)))]}
+  (conj purchases new-purchase))
+
+(println
+  (adiciona-compra b.db/purchases {:date "2021-12-03", :value 53.50, :seller "Starbucks", :category "food"}))
+
 ; funcao que retorna o total gasto por categoria
 
 (defn group-by-category
