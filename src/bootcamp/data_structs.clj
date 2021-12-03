@@ -1,4 +1,7 @@
-(ns bootcamp.data-structs)
+(ns bootcamp.data-structs
+  (:require [schema.core :as s]))
+
+(s/set-fn-validation! true)
 
 ; :client {:name  string,
 ;         :cpf string,
@@ -27,14 +30,21 @@
 (println "Credit Card:" credit-card)
 ; ====================================================
 
-;{:purchase {:date string,
-;             :value double,
-;             :seller string,
-;             :category string}}
+(defn double-maior-ou-igual-a-zero? [x]
+  (and (double? x) (>= x 0)))
 
-(def purchase {:date     "2021-11-22",
-               :value    100.0,
-               :seller   "Magalu",
-               :category "eletronics"})
+(def ValorFinanceiro (s/pred double-maior-ou-igual-a-zero? 'double-maior-ou-igual-a-zero))
 
-(println "Purchase:" purchase)
+; schema de uma compra
+(def Purchase
+  {:date     s/Str
+   :value    ValorFinanceiro
+   :seller   s/Str
+   :category s/Keyword})
+
+(println (s/validate Purchase {:date     "2021-11-22",
+                               :value    200.0,
+                               :seller   "Magalu",
+                               :category :eletronics}))
+
+;(println "Purchase:" purchase)
