@@ -1,17 +1,16 @@
 (ns bootcamp.data-structs
-  (:require [schema.core :as s]))
+  (:require [schema.core :as s])
+  (:import (java.sql ClientInfoStatus)))
 
 (s/set-fn-validation! true)
 
-; :client {:name  string,
-;         :cpf string,
-;         :email string}
+(def Client
+  {:name s/Str, :cpf s/Str, :email s/Str})
 
-(def client {:name  "Emily",
-             :cpf   "39875649088",
-             :email "emily.faccin@nubank.com.br"})
+(println (s/validate Client {:name  "Emily Faccin",
+                             :cpf   "39861661816",
+                             :email "emily.faccin@nubank.com"}))
 
-(println "Client:" client)
 ; ==================================================
 
 ; Dado que o exercicio trata de apenas um cliente, nao ha necessidade
