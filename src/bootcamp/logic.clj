@@ -36,7 +36,7 @@
        group-by-category
        (map sum-by-category)))
 
-(println (total-by-category b.db/purchases))
+(println (total-by-category []))
 
 ; calcular o total do mes solicitado
 
