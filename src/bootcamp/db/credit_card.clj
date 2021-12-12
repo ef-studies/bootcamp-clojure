@@ -1,6 +1,7 @@
 (ns bootcamp.db.credit-card
   (:require [schema.core :as s]
-            [datomic.api :as d]))
+            [datomic.api :as d]
+            [bootcamp.models.credit-card :as m.credit-card]))
 
 (def schema [{:db/ident       :credit-card/number
               :db/valueType   :db.type/string
@@ -23,5 +24,5 @@
               :db/cardinality :db.cardinality/one}])
 
 (s/defn new!
-  [conn, credit-cards]
+  [conn, credit-cards :- [m.credit-card/CreditCard]]
   (d/transact conn credit-cards))
