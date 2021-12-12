@@ -14,6 +14,7 @@
               :db/cardinality :db.cardinality/one}
              {:db/ident       :credit-card/id
               :db/valueType   :db.type/uuid
+              :db/unique      :db.unique/identity
               :db/cardinality :db.cardinality/one}
              {:db/ident     :credit-card/client
               :db/valueType :db.type/ref

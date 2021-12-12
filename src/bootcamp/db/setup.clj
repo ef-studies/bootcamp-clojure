@@ -3,6 +3,7 @@
             [bootcamp.db.client :as db.client]
             [bootcamp.db.credit-card :as db.credit-card]))
 
+;(d/delete-database db-uri)
 
 (def db-uri "datomic:dev://localhost:4334/nubank")
 
