@@ -1,6 +1,7 @@
 (ns bootcamp.db.setup
   (:require [datomic.api :as d]
-            [bootcamp.db.client :as db.client]))
+            [bootcamp.db.client :as db.client]
+            [bootcamp.db.credit-card :as db.credit-card]))
 
 
 (def db-uri "datomic:dev://localhost:4334/nubank")
@@ -16,3 +17,4 @@
   (d/connect uri)))
 
 (d/transact (connection) db.client/schema)
+(d/transact (connection) db.credit-card/schema)
