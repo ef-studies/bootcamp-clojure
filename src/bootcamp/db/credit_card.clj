@@ -1,4 +1,6 @@
-(ns bootcamp.db.credit-card)
+(ns bootcamp.db.credit-card
+  (:require [schema.core :as s]
+            [datomic.api :as d]))
 
 (def schema [{:db/ident       :credit-card/number
               :db/valueType   :db.type/string
@@ -7,7 +9,7 @@
               :db/valueType   :db.type/string
               :db/cardinality :db.cardinality/one}
              {:db/ident       :credit-card/expiration-date
-              :db/valueType   :db.type/instant
+              :db/valueType   :db.type/string
               :db/cardinality :db.cardinality/one}
              {:db/ident       :credit-card/limit
               :db/valueType   :db.type/bigdec
@@ -16,6 +18,10 @@
               :db/valueType   :db.type/uuid
               :db/unique      :db.unique/identity
               :db/cardinality :db.cardinality/one}
-             {:db/ident     :credit-card/client
-              :db/valueType :db.type/ref
+             {:db/ident       :credit-card/client
+              :db/valueType   :db.type/ref
               :db/cardinality :db.cardinality/one}])
+
+(s/defn new!
+  [conn, credit-cards]
+  (d/transact conn credit-cards))
