@@ -7,7 +7,9 @@
             [bootcamp.models.credit-card :as m.credit-card]
             [bootcamp.db.credit-card :as db.credit-card]
             [bootcamp.models.category :as m.category]
-            [bootcamp.db.category :as db.category]))
+            [bootcamp.db.category :as db.category]
+            [bootcamp.models.purchase :as m.purchase]
+            [bootcamp.db.purchase :as db.purchase]))
 
 (s/set-fn-validation! true)
 
@@ -26,3 +28,9 @@
 (def eletronics (m.category/to-category "eletronics"))
 (def subscriptions (m.category/to-category "subscriptions"))
 (db.category/new! conn [food, eletronics, subscriptions])
+
+(def compra1 (m.purchase/to-purchase "2021-12-01" 1200M "Magalu" eletronics emily-card))
+(def compra2 (m.purchase/to-purchase "2021-12-07" 19M "Bom Jardim" food emily-card))
+(def compra3 (m.purchase/to-purchase "2021-12-10" 84.20M "Poke Vila Velha" food fernanda-card))
+(def compra4 (m.purchase/to-purchase "2021-12-13" 6500M "Avell" eletronics fernanda-card))
+(db.purchase/new! conn [compra1, compra2, compra3, compra4])

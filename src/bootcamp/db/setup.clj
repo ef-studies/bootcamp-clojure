@@ -2,7 +2,8 @@
   (:require [datomic.api :as d]
             [bootcamp.db.client :as db.client]
             [bootcamp.db.credit-card :as db.credit-card]
-            [bootcamp.db.category :as db.category]))
+            [bootcamp.db.category :as db.category]
+            [bootcamp.db.purchase :as db.purchase]))
 
 ;(d/delete-database db-uri)
 
@@ -21,3 +22,4 @@
 (d/transact (connection) db.client/schema)
 (d/transact (connection) db.credit-card/schema)
 (d/transact (connection) db.category/schema)
+(d/transact (connection) db.purchase/schema)
